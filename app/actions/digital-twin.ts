@@ -81,14 +81,22 @@ export async function queryDigitalTwin(question: string): Promise<RAGResponse> {
     const index = getVectorIndex()
 
     console.log("Querying with question:", question)
+    console.log("Using index URL:", process.env.UPSTASH_VECTOR_REST_URL)
+    console.log("Token present:", !!process.env.UPSTASH_VECTOR_REST_TOKEN)
 
-    const results = await index.query({
-      data: question,
-      topK: 3,
-      includeMetadata: true,
-    })
-
-    console.log("Query returned results:", results?.length || 0)
+    let results
+    try {
+      results = await index.query({
+        data: question,
+        topK: 3,
+        includeMetadata: true,
+      })
+      console.log("Query returned results:", results?.length || 0)
+      console.log("Results object:", JSON.stringify(results, null, 2))
+    } catch (queryError) {
+      console.error("Error during index.query:", queryError)
+      throw queryError
+    }
 
     if (!results || results.length === 0) {
       // Try to get database info to debug
