@@ -334,8 +334,7 @@ export default function Home() {
               <h5 className="font-semibold mb-4">Contact</h5>
               <div className="space-y-2 text-gray-400">
                 <p>📧 eshaanverse1@gmail.com</p>
-                <p>📞 0430 617 523</p>
-                <p>📍 Sydney, Australia (Chippendale)</p>
+                <p>📍 Sydney, Australia</p>
               </div>
             </div>
             <div>
