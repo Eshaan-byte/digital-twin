@@ -137,28 +137,36 @@ Question: ${question}
 
 Provide a helpful, professional response:`
 
-    const completion = await groq.chat.completions.create({
-      messages: [
-        {
-          role: "system",
-          content: "You are an AI digital twin representing Eshaan Gupta. Answer questions as if you are the person, speaking in first person about your background, skills, and experience. Be professional, concise, and highlight relevant achievements.",
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      model: "llama-3.1-8b-instant",
-      temperature: 0.7,
-      max_tokens: 500,
-    })
+    try {
+      const completion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: "You are an AI digital twin representing Eshaan Gupta. Answer questions as if you are the person, speaking in first person about your background, skills, and experience. Be professional, concise, and highlight relevant achievements.",
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        model: "llama-3.1-8b-instant",
+        temperature: 0.7,
+        max_tokens: 500,
+      })
 
-    const answer = completion.choices[0]?.message?.content?.trim() || "Unable to generate response"
+      const answer = completion.choices[0]?.message?.content?.trim() || "Unable to generate response"
 
-    return {
-      success: true,
-      answer,
-      sources,
+      return {
+        success: true,
+        answer,
+        sources,
+      }
+    } catch (groqError) {
+      console.error("Error calling Groq API:", groqError)
+      return {
+        success: false,
+        error: `Groq API error: ${groqError instanceof Error ? groqError.message : "Unknown error"}`,
+      }
     }
   } catch (error) {
     console.error("Error in queryDigitalTwin:", error)
