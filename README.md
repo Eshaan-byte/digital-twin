@@ -174,6 +174,29 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 See [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md) for detailed configuration steps.
 
+## Deployment to Vercel
+
+This project is deployed on Vercel for 24/7 availability.
+
+### Deploy Your Own
+
+1. Push to GitHub:
+```bash
+git remote add origin https://github.com/yourusername/mydigitaltwin.git
+git push -u origin main
+```
+
+2. Deploy on Vercel:
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Add environment variables:
+     - `UPSTASH_VECTOR_REST_URL`
+     - `UPSTASH_VECTOR_REST_TOKEN`
+     - `GROQ_API_KEY`
+   - Deploy!
+
+3. Your digital twin will be live at: `https://yourproject.vercel.app`
+
 ## Completed Features
 
 - [✅] Implement MCP server actions
@@ -182,12 +205,14 @@ See [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md) for detailed configuration 
 - [✅] Interactive web UI for testing
 - [✅] Database status checking
 - [✅] MCP protocol compliance (JSON-RPC 2.0)
+- [✅] TypeScript with strict types
+- [✅] Production build optimized
+- [✅] 36 content chunks loaded in Upstash
 
 ## Future Enhancements
 
 - [ ] Create profile data management UI
 - [ ] Add analytics and query logging
-- [ ] Deploy to Vercel
 - [ ] Add authentication for profile editing
 - [ ] Implement caching for frequent queries
 - [ ] Add multi-language support
