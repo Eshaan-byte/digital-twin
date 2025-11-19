@@ -79,6 +79,9 @@ export async function queryDigitalTwin(question: string): Promise<RAGResponse> {
 
     // Step 1: Query vector database
     const index = getVectorIndex()
+
+    console.log("Querying with question:", question)
+
     const results = await index.query<{
       title: string
       content: string
@@ -91,7 +94,17 @@ export async function queryDigitalTwin(question: string): Promise<RAGResponse> {
       includeMetadata: true,
     })
 
+    console.log("Query returned results:", results?.length || 0)
+
     if (!results || results.length === 0) {
+      // Try to get database info to debug
+      try {
+        const dbInfo = await index.info()
+        console.log("Database info:", dbInfo)
+      } catch (e) {
+        console.log("Could not get db info:", e)
+      }
+
       return {
         success: true,
         answer: "I don't have specific information about that topic in my profile.",
