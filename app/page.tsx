@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { queryDigitalTwin, getDatabaseInfo } from "./actions/digital-twin"
 
+
 export default function Home() {
   const [question, setQuestion] = useState("")
   const [answer, setAnswer] = useState("")
