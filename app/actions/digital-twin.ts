@@ -82,13 +82,7 @@ export async function queryDigitalTwin(question: string): Promise<RAGResponse> {
 
     console.log("Querying with question:", question)
 
-    const results = await index.query<{
-      title: string
-      content: string
-      type: string
-      category: string
-      tags: string[]
-    }>({
+    const results = await index.query({
       data: question,
       topK: 3,
       includeMetadata: true,
